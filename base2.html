@@ -1,0 +1,45 @@
+{% extends 'c:\users\jalen smith\desktop\coding_stuff\django_webpage_project\app_3\templates\app_3\homepage.html' %}
+
+{% block style %}
+<style>
+    .navbar-text, p, h2, h4 {
+        color: #FFD700;
+    }
+</style>
+{% endblock %}
+
+{% block navbarform %}
+<form class="navbar-form" role="search" name="lookup_form" autocomplete="off">
+    <label for="name"></label>
+    
+    <div style="margin-top: 10px;">
+        <input type="text" id="name" name="name" autocomplete="false" style="height: 30px; width: 200px;">&ensp;
+
+        <button class="btn btn-default" type="submit" id="submit">Submit</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block content %}
+<div style="height: 825px; background-image: url(https://www.ilmcorp.com/wp-content/uploads/2018/10/iStock-494896064.jpg);">
+    <div class="container" style="margin-left: 0px;">
+        <div class="row">
+            <div class="col-xs-8" style="width: 1000px; height: 333px; background-color: #A52A2A; border: 3px solid black; margin-left: 500px; margin-top: 260px;">
+                {% load static %}
+                <img style="width:150px; height:150px;" alt="person's picture" src="{% static 'person_icon.jpg' %}">&emsp;
+                <h2 style="width: 500px; display: inline;">{% for object in data %}{{object.first_name}}{% endfor %}&nbsp;{% for object in data %}{{object.last_name}}{% endfor %}</h2>
+
+                <br>
+
+                <div>
+                    <h4>Full Name:&nbsp;{% for object in data %}{{object.first_name}}{% endfor %}&nbsp;{% for object in data %}{{object.last_name}}{% endfor %}</h4>
+                    <br>
+                    <h4>Age:&nbsp;{% for object in data %}{{object.age}}{% endfor %}</h4>
+                    <br>
+                    <h4>Occupation:&nbsp;{% for object in data %}{{object.occupation}}{% endfor %}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

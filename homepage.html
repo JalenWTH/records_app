@@ -1,0 +1,100 @@
+<head>
+
+    <!--Jquery reference-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!--Bootstrap reference-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Jalen Smith Records Bureau</title>
+
+</head>
+
+<script>
+    /* 
+    should pass the entered name to url_var and redirect to a page with the records of 
+    the person whose name was entered
+    */
+
+    window.addEventListener('load', function() {
+        document.getElementById('name').addEventListener('submit', function (e) {
+
+            event.preventDefault()
+
+            })  
+
+        document.getElementById('submit').addEventListener('click', function (e) {
+            var form_data = document.getElementById('name').value
+
+            var url_var = 'http://127.0.0.1:8000/app_3//record'
+
+            if (form_data.length != 0) {
+                url_var = url_var.slice(0, 28) + form_data + url_var.slice(28)
+
+                window.open(url_var)
+            }
+        })
+    })
+</script>
+
+{% block style %}
+<style>
+    h1, p, label {
+        color: #FFD700;
+    }
+</style>
+{% endblock %}
+
+<html>
+
+<body>
+<!--Page header-->
+<nav class="navbar navbar-default" style="background-color: #A52A2A; margin-bottom: 0;">
+    <a class="navbar-brand thumbnail" href="http://127.0.0.1:8000/app_3/home" style="background-color: inherit; border: none;">
+        {% load static %}
+        <img style="height:100px; width:100px;" alt="badge image" src="{% static 'badge_icon_2.jpg' %}">
+    </a>
+    <h1 class="navbar-text" style="color: #FFD700;">Jalen Smith Records Bureau</h1>
+    {% block navbarform %}{% endblock %}
+</nav>
+<!--End of page header-->
+{% block content %}
+<div style="height: 825px; background-image: url(https://www.ilmcorp.com/wp-content/uploads/2018/10/iStock-494896064.jpg);">
+    <div class="container" style="margin-left: 0px;">
+        <div class="row">
+            <div class="col-xs-8" style=" margin-left: 60%;">
+                <div style="background-color: #A52A2A; width: 600px; height: 200px; margin-top: 312px; border: 3px solid black;">
+                    <form name='lookup_form' autocomplete="off">
+                        <label style=" margin-left: 100px; font-size: 20px;" for="name">Enter a person's name to see their records:</label>
+                        
+                        <br>
+                        
+                        <input autocomplete="false" type="text" id="name" name="name" style=" height: 35px; width: 500px; margin-left: 50px; border: 3px solid black;">
+                        
+                        <br>
+                        <br>
+                        <br>
+                        
+                        <input id="submit" type="submit" value="Submit" style=" width: 200px; margin-left: 200px; border: 3px solid black;">
+
+                        <br>
+
+                        {% if validname == False %}
+                            <h4 style="color: #FFD700; width: 225px; margin-left: 195px;">Please Enter a valid name</h4>
+                        {% endif %}
+
+                        <br>
+
+                        {% if foundmodel == False %}
+                            <h4 style="color: #FFD700; width: 350px; margin-left: 125px;">That name does not exist in our records</h4>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
